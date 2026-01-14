@@ -58,17 +58,29 @@ export const request = async <T = unknown>(
     headers.set("Authorization", `Bearer ${accessToken}`);
   }
 
-  let body = options.body;
-  if (
-    body &&
-    typeof body === "object" &&
-    !(body instanceof FormData) &&
-    !(body instanceof Blob)
+  const rawBody = options.body;
+  let body: BodyInit | null | undefined;
+  if (rawBody == null) {
+    body = undefined;
+  } else if (typeof rawBody === "string") {
+    body = rawBody;
+  } else if (
+    rawBody instanceof FormData ||
+    rawBody instanceof Blob ||
+    rawBody instanceof URLSearchParams
   ) {
+    body = rawBody;
+  } else if (rawBody instanceof ArrayBuffer) {
+    body = rawBody;
+  } else if (ArrayBuffer.isView(rawBody)) {
+    body = rawBody;
+  } else if (typeof ReadableStream !== "undefined" && rawBody instanceof ReadableStream) {
+    body = rawBody;
+  } else {
     if (!headers.has("Content-Type")) {
       headers.set("Content-Type", "application/json");
     }
-    body = JSON.stringify(body);
+    body = JSON.stringify(rawBody);
   }
 
   const response = await fetch(url, {
