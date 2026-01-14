@@ -483,19 +483,6 @@ const mapMenuDetail = (data: MenuCategory[] | null) => {
   return mapped;
 };
 
-const mapToppings = (data: MenuCategory[] | null, categoryName: string) => {
-  if (!data) return null;
-  const category = data.find((item) => item.kategorie === categoryName);
-  if (!category) return null;
-  return category.toping.flatMap((group, index) => {
-    return group.items.map((item, idx) => ({
-      id: `${index}-${idx}`,
-      name: item.name,
-      image: item.img,
-    }));
-  });
-};
-
 const formatRequirement = (
   requirements: { name: string; quantity: number }[],
   selection?: Mission["selection"]

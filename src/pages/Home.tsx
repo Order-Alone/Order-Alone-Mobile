@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import RankingList from "../components/RankingList";
 import PracticeCard from "../components/PracticeCard";

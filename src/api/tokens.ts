@@ -40,10 +40,10 @@ export const parseTokenResponse = (data: unknown): Tokens => {
       try {
         payload = JSON.parse(trimmed);
       } catch {
-        return { accessToken: payload };
+        return { accessToken: trimmed };
       }
     } else {
-      return { accessToken: payload };
+      return { accessToken: trimmed };
     }
   }
 

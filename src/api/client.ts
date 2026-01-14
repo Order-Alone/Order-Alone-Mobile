@@ -2,9 +2,10 @@ import { clearTokens, loadTokens, parseTokenResponse, saveTokens } from "./token
 
 const API_BASE = "http://13.209.210.38/api";
 
-type RequestOptions = RequestInit & {
+type RequestOptions = Omit<RequestInit, "body"> & {
   auth?: boolean;
   retry?: boolean;
+  body?: unknown;
 };
 
 let refreshPromise: Promise<string | null> | null = null;
