@@ -1,6 +1,6 @@
 import { clearTokens, loadTokens, parseTokenResponse, saveTokens } from "./tokens";
 
-const API_BASE = "http://13.209.210.38/api";
+const API_BASE = "/api";
 
 type RequestOptions = Omit<RequestInit, "body"> & {
   auth?: boolean;
