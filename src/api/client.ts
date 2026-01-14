@@ -71,9 +71,9 @@ export const request = async <T = unknown>(
   ) {
     body = rawBody;
   } else if (rawBody instanceof ArrayBuffer) {
-    body = rawBody;
+    body = rawBody as BodyInit;
   } else if (ArrayBuffer.isView(rawBody)) {
-    body = rawBody;
+    body = rawBody as BodyInit;
   } else if (typeof ReadableStream !== "undefined" && rawBody instanceof ReadableStream) {
     body = rawBody;
   } else {
